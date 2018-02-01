@@ -1,21 +1,52 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Redirect,
+  // withRouter,
+  Switch,
+  Route
+} from 'react-router-dom'
+// import Layout from 'react-layout'
 
-class App extends Component {
+import env from './config/env'
+
+import Home from './routes/home'
+import Protected from './routes/protected'
+import Nav from './components/nav'
+
+console.log(env)
+
+class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <Router>
+        <div>
+          {/* <Nav /> */}
+          <Switch>
+            <Route exact path="/" component={Home} />
+            {/* <PrivateRoute path="/protected" component={Protected} /> */}
+          </Switch>
+        </div>
+      </Router>
+    )
   }
 }
 
-export default App;
+// const PrivateRoute = ({ component, ...rest }) => {
+  // console.log(component, rest)
+  // return (
+    // <div>HI</div>
+    // <Route {...rest} render={props => (
+    //   fakeAuth.isAuthenticated ? (
+    //     <Component {...props} />
+    //   ) : (
+    //       <Redirect to={{
+    //         pathname: '/',
+    //         state: { from: props.location }
+    //       }} />
+    //     )
+    // )} />
+  // )
+// }
+
+export default App
