@@ -21,7 +21,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          {/* <Nav /> */}
+          <Nav />
           <Switch>
             <Route exact path="/" component={Home} />
             {/* <PrivateRoute path="/protected" component={Protected} /> */}
