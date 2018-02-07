@@ -31,12 +31,19 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <AuthRoute path="/protected" component={Protected} />
+            <Route component={noMatch} />
           </Switch>
         </div>
       </Router>
     )
   }
 }
+
+const noMatch = () => (
+  <div>
+    <h3>404 ERROR !!</h3>
+  </div>
+)
 
 let AuthRoute = ({ component: Component, ...rest }) => {
   console.log(rest)
