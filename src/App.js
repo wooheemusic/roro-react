@@ -1,20 +1,18 @@
 import React from 'react'
 import {
   BrowserRouter as Router,
-  Redirect,
+  // Redirect,
   // withRouter,
   Switch,
   Route
 } from 'react-router-dom'
 // import Layout from 'react-layout'
 
-import env from './config/env'
+// import env from './core/config/env'
 
 import Home from './routes/home'
-import Protected from './routes/protected'
-import Nav from './components/nav'
-
-console.log(env)
+// import Protected from './routes/protected'
+import Nav from './components/layout/nav'
 
 class App extends React.Component {
   render() {
