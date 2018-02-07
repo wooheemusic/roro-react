@@ -1,5 +1,5 @@
 import React from 'react'
-import css from './login.scss'
+import './login.scss'
 import { connect } from 'react-redux'
 
 import {
@@ -50,12 +50,11 @@ class Login extends React.Component {
 
       setTimeout(() => {
         this.setState({ isLoading: false })
-      }, 5000)
+      }, 2000)
     } else {
       this.setState({ isLoading: false })
     }
 
-    // console.log(this.state)
   }
 
   render() {
@@ -77,7 +76,7 @@ class Login extends React.Component {
             placeholder="Email address"
           />
           {isSubmitted && !username &&
-            <div className="help-block">Username is required</div>
+            <div className="help-block text-danger"><small>Username is required</small></div>
           }
 
           <label className="sr-only">Password</label>
@@ -90,7 +89,7 @@ class Login extends React.Component {
             placeholder="Password"
           />
           {isSubmitted && !username &&
-            <div className="help-block">Username is required</div>
+            <div className="help-block text-danger"><small>Username is required</small></div>
           }
           {/* <div className="checkbox mb-3">
             <label><input type="checkbox" value="remember-me" /> Remember me</label>
@@ -105,6 +104,7 @@ class Login extends React.Component {
           }
           <p className="mt-5 mb-3 text-muted">© 2017-2018</p>
         </form>
+
       </div>
     )
   }

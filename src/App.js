@@ -1,28 +1,36 @@
 import React from 'react'
 import {
   BrowserRouter as Router,
-  // Redirect,
+  Redirect,
   // withRouter,
   Switch,
   Route
 } from 'react-router-dom'
-// import Layout from 'react-layout'
+import { connect } from 'react-redux'
 
 // import env from './core/config/env'
 
 import Home from './routes/home'
-// import Protected from './routes/protected'
+import Protected from './routes/protected'
 import Nav from './components/layout/nav'
 
 class App extends React.Component {
+
+  // constructor(props) {
+  //   super(props)
+
+  //   console.log(props)
+  // }
+
   render() {
     return (
       <Router>
         <div>
+          {/* <h1>{this.props.me.name}</h1> */}
           <Nav />
           <Switch>
             <Route exact path="/" component={Home} />
-            {/* <PrivateRoute path="/protected" component={Protected} /> */}
+            <AuthRoute path="/protected" component={Protected} />
           </Switch>
         </div>
       </Router>
@@ -30,21 +38,34 @@ class App extends React.Component {
   }
 }
 
-// const PrivateRoute = ({ component, ...rest }) => {
-  // console.log(component, rest)
+let AuthRoute = ({ component: Component, ...rest }) => {
+  console.log(rest)
   // return (
-    // <div>HI</div>
-    // <Route {...rest} render={props => (
-    //   fakeAuth.isAuthenticated ? (
-    //     <Component {...props} />
-    //   ) : (
-    //       <Redirect to={{
-    //         pathname: '/',
-    //         state: { from: props.location }
-    //       }} />
-    //     )
-    // )} />
+  //   <div>Hi</div>
   // )
-// }
+  return (
+    <Route {...rest} render={props => (
+      rest.isLogin ? (
+        <Component {...props} />
+      ) : (
+          <Redirect to={{
+            pathname: '/',
+            state: {
+              from: props.location,
+              isLogin: props.isLogin
+            }
+          }} />
+        )
+    )} />
+  )
+}
+
+let mapStateToProps = (state) => {
+  return {
+    isLogin: state.isLogin
+  }
+}
+
+AuthRoute = connect(mapStateToProps)(AuthRoute)
 
 export default App

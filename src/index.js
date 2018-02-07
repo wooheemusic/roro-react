@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import store from './core/store/auth.store'
 
 import 'bootstrap/dist/css/bootstrap.css'
+import './styles/core.scss'
 
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
