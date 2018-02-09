@@ -64,36 +64,42 @@ class Login extends React.Component {
     return (
       <div>
         {/* <h1>{this.props.me.name}</h1> */}
+        <div className="text-center">
+          <h1>Bettle</h1>
+        </div>
         <form className="form-signin" onSubmit={this.onSubmit}>
-          <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-          <label className="sr-only">Email address</label>
-          <input
-            value={username}
-            name="username"
-            type="text"
-            onChange={this.onChange}
-            className="form-control"
-            placeholder="Email address"
-          />
-          {isSubmitted && !username &&
-            <div className="help-block text-danger"><small>Username is required</small></div>
-          }
 
-          <label className="sr-only">Password</label>
-          <input
-            value={password}
-            name="password"
-            type="password"
-            onChange={this.onChange}
-            className="form-control"
-            placeholder="Password"
-          />
-          {isSubmitted && !username &&
-            <div className="help-block text-danger"><small>Username is required</small></div>
-          }
-          {/* <div className="checkbox mb-3">
+          <div className="input-container">
+            <input
+              value={username}
+              name="username"
+              type="text"
+              onChange={this.onChange}
+              className="form-control"
+              placeholder="Email address"
+            />
+            {isSubmitted && !username &&
+              <div className="help-block text-danger"><small>Username is required</small></div>
+            }
+          </div>
+
+          <div className="input-container">
+            <label className="sr-only">Password</label>
+            <input
+              value={password}
+              name="password"
+              type="password"
+              onChange={this.onChange}
+              className="form-control"
+              placeholder="Password"
+            />
+            {isSubmitted && !password &&
+              <div className="help-block text-danger"><small>Username is required</small></div>
+            }
+            {/* <div className="checkbox mb-3">
             <label><input type="checkbox" value="remember-me" /> Remember me</label>
           </div> */}
+          </div>
 
           {!isLoading &&
             <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
@@ -102,7 +108,6 @@ class Login extends React.Component {
           {isLoading &&
             <button className="btn btn-lg btn-primary btn-block" disabled type="submit">Loading</button>
           }
-          <p className="mt-5 mb-3 text-muted">© 2017-2018</p>
         </form>
 
       </div>
