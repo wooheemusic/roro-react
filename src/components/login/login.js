@@ -1,26 +1,24 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './login.scss'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import * as authActions from '../../core/store/modules/auth';
+import * as T from 'react-translated'
 
-import {
-  login,
-  logout
-} from './../../core/actions/auth.action'
+class Login extends Component {
 
-class Login extends React.Component {
+  state = {
+    username: '',
+    password: '',
+    isSubmitted: false,
+    isLoading: false
+  }
+
   constructor(props) {
     super(props)
+    // console.log(props)
 
-    console.log(props)
-
-    this.props.logout()
-
-    this.state = {
-      username: '',
-      password: '',
-      isSubmitted: false,
-      isLoading: false
-    }
+    props.Auth.logout()
 
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -29,7 +27,6 @@ class Login extends React.Component {
   onChange(e) {
     const { name, value } = e.target
     this.setState({ [name]: value })
-    // console.log(this.state)
   }
 
   onSubmit(e) {
@@ -42,7 +39,7 @@ class Login extends React.Component {
     })
     const { username, password } = this.state
     if (username && password) {
-      this.props.login({
+      this.props.Auth.login({
         idx: 1,
         name: username,
         token: 'simple token'
@@ -63,9 +60,8 @@ class Login extends React.Component {
 
     return (
       <div>
-        {/* <h1>{this.props.me.name}</h1> */}
         <div className="text-center">
-          <h1>Bettle</h1>
+          <h1><T.Translate text='Beetle' /></h1>
         </div>
         <form className="form-signin" onSubmit={this.onSubmit}>
 
@@ -115,18 +111,12 @@ class Login extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
-  return {
-    me: state.me
-  }
-}
-
-let mapDispatchToProps = (dispatch) => {
-  return {
-    login: (me) => dispatch(login(me)),
-    logout: () => dispatch(logout())
-  }
-}
-
-Login = connect(mapStateToProps, mapDispatchToProps)(Login)
-export default Login
+export default connect(
+  (state) => ({
+    me: state.auth.me,
+    isLogin: state.auth.isLogin
+  }),
+  (dispatch) => ({
+    Auth: bindActionCreators(authActions, dispatch)
+  })
+)(Login);

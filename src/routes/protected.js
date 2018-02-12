@@ -1,11 +1,24 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const Protected = () => {
+let Protected = (props) => {
+
+  console.log(props)
+
   return (
     <div>
       <h1>Protected Page</h1>
+      <h5>{props.me.name}</h5>
     </div>
   )
 }
 
-export default Protected
+let mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    me: state.auth.me,
+    isLogin: state.auth.isLogin
+  }
+}
+
+export default Protected = connect(mapStateToProps)(Protected)

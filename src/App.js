@@ -7,6 +7,11 @@ import {
   Route
 } from 'react-router-dom'
 import { connect } from 'react-redux'
+// import * as _ from 'lodash'
+
+import { Provider as TransProvider } from 'react-translated'
+import translation from './locales'
+// TransModules
 
 // import env from './core/config/env'
 
@@ -16,24 +21,23 @@ import Nav from './components/layout/nav'
 
 class App extends React.Component {
 
-  // constructor(props) {
-  //   super(props)
-
-  //   console.log(props)
-  // }
+  state = {
+    lang: navigator.language
+  }
 
   render() {
+    // console.log(this.props)
     return (
       <Router>
-        <div>
-          {/* <h1>{this.props.me.name}</h1> */}
+        <TransProvider language={this.state.lang} translation={translation}>
+          {/*<h1>{this.props.me}</h1>*/}
           <Nav />
           <Switch>
             <Route exact path="/" component={Home} />
             <AuthRoute path="/protected" component={Protected} />
             <Route component={noMatch} />
           </Switch>
-        </div>
+        </TransProvider>
       </Router>
     )
   }
@@ -51,6 +55,7 @@ let AuthRoute = ({ component: Component, ...rest }) => {
   //   <div>Hi</div>
   // )
   return (
+
     <Route {...rest} render={props => (
       rest.isLogin ? (
         <Component {...props} />
@@ -64,15 +69,24 @@ let AuthRoute = ({ component: Component, ...rest }) => {
           }} />
         )
     )} />
+
   )
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps_AuthRoute = (state) => {
+  // console.log(state)
   return {
-    isLogin: state.isLogin
+    isLogin: state.auth.isLogin
   }
 }
 
-AuthRoute = connect(mapStateToProps)(AuthRoute)
+let mapStateToProps = (state) => {
+  // console.log(state)
+  return {
+    lang: state.lang.lang
+  }
+}
 
+AuthRoute = connect(mapStateToProps_AuthRoute)(AuthRoute)
+App = connect(mapStateToProps)(App)
 export default App
