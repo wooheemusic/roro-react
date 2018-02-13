@@ -15,7 +15,7 @@ export default handleActions({
   [CHANGE_LANG]: (state, action) => {
     console.log(action)
     return {
-      lang: action.payload.lang
+      lang: action.payload
     }
   }
 }, initState)

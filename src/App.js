@@ -21,15 +21,11 @@ import Nav from './components/layout/nav'
 
 class App extends React.Component {
 
-  state = {
-    lang: navigator.language
-  }
-
   render() {
-    // console.log(this.props)
+    console.log('App Props : ', this.props)
     return (
       <Router>
-        <TransProvider language={this.state.lang} translation={translation}>
+        <TransProvider language={this.props.lang} translation={translation}>
           {/*<h1>{this.props.me}</h1>*/}
           <Nav />
           <Switch>
@@ -73,20 +69,20 @@ let AuthRoute = ({ component: Component, ...rest }) => {
   )
 }
 
-let mapStateToProps_AuthRoute = (state) => {
-  // console.log(state)
-  return {
-    isLogin: state.auth.isLogin
+AuthRoute = connect(
+  (state) => {
+    // console.log(state)
+    return {
+      isLogin: state.auth.isLogin
+    }
   }
-}
+)(AuthRoute)
 
-let mapStateToProps = (state) => {
-  // console.log(state)
-  return {
-    lang: state.lang.lang
-  }
-}
-
-AuthRoute = connect(mapStateToProps_AuthRoute)(AuthRoute)
-App = connect(mapStateToProps)(App)
+App = connect(
+  (state) => {
+    // console.log(state)
+    return {
+      lang: state.lang.lang
+    }
+  })(App)
 export default App
