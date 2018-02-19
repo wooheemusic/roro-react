@@ -15,9 +15,13 @@ const initState = {
   isLogin: false
 }
 
+// 리로드 시 sessioned token data가 서버에서 아직 유효한지 검증하는 것은 여기서 해야하나
+
 export default handleActions({
   [LOGIN]: (state, action) => {
-    // console.log(action)
+    console.log(typeof login, logout);
+    console.log("store auth state :", state);
+     console.log("store auth action :",action);
     return {
       me: action.payload,
       isLogin: true

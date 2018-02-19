@@ -46,7 +46,9 @@ const noMatch = () => (
 )
 
 let AuthRoute = ({ component: Component, ...rest }) => {
-  console.log(rest)
+  // console.log("AuthRoute :", arguments); // arrow function deprecates the old 'arguments'
+  console.log("AuthRoute Component :", Component); // Protected
+  console.log("AuthRoute rest:", rest);
   // return (
   //   <div>Hi</div>
   // )
@@ -71,7 +73,7 @@ let AuthRoute = ({ component: Component, ...rest }) => {
 
 AuthRoute = connect(
   (state) => {
-    // console.log(state)
+     console.log("AuthRoute connect", state);
     return {
       isLogin: state.auth.isLogin
     }
@@ -80,7 +82,7 @@ AuthRoute = connect(
 
 App = connect(
   (state) => {
-    // console.log(state)
+    console.log("App connect state", state)
     return {
       lang: state.lang.lang
     }

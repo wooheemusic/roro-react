@@ -2,6 +2,7 @@ const transition = {
   'Beetle': {
     en: 'Beetle',
     ko: '비틀',
+    ch: '충'
   },
 }
 

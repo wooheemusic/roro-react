@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 let Protected = (props) => {
 
-  console.log(props)
+  console.log("Protected props :",  props)
 
   return (
     <div>
@@ -14,7 +14,7 @@ let Protected = (props) => {
 }
 
 let mapStateToProps = (state) => {
-  console.log(state)
+  console.log("Protected connect :", state)
   return {
     me: state.auth.me,
     isLogin: state.auth.isLogin

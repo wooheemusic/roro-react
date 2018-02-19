@@ -6,11 +6,14 @@ import * as langAction from '../core/store/modules/lang';
 
 class Home extends React.Component {
 
-  // constructor(props) {
-  //   super(props)
-  // }
+  constructor(props) {
+    super();
+    console.log("Home constructor", props);
+  }
 
   render() {
+    console.log("Home props :", this.props);
+    console.log("redux-connected Login Module :", Login);
     return (
       <div>
         <Login />
@@ -25,7 +28,7 @@ class LangChangeButton extends React.Component {
 
   constructor(props) {
     super(props)
-    console.log(props)
+    console.log("LangChangeButton", props)
 
     this.onChangeLang = this.onChangeLang.bind(this)
   }
@@ -44,6 +47,15 @@ class LangChangeButton extends React.Component {
   }
 
 }
+
+Home = connect(
+  (state) => {
+     console.log("Home connect", state);
+    return {
+      isLogin: state.auth.isLogin
+    }
+  }
+)(Home);
 
 const mapStateToProps = (state) => {
   return {

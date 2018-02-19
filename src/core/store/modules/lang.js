@@ -8,12 +8,12 @@ export const changeLang = createAction(CHANGE_LANG)
 
 const initState = {
   lang: navigator.language
-  // lang: 'en'
+  // lang: 'ch'
 }
 
 export default handleActions({
   [CHANGE_LANG]: (state, action) => {
-    console.log(action)
+    console.log(CHANGE_LANG, state, action)
     return {
       lang: action.payload
     }
